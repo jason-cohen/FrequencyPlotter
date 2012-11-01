@@ -21,24 +21,20 @@
 #include "bsp.h"
 #include "adcMeasure.h"
 
-#ifndef MUX_VALUE
-#define MUX_VALUE
-#endif
-
 #endif
 
 //Global variables
 const float quantStep = VBIAS / (2 ^ (ADC_BIT_WIDTH - 1));
 
 //Convert the 10-bit array into integers to the actual voltage values
-void convertADC(*adcArray measurements) {
+void convertADC(adcArray* measurements) {
 	// Scaling factor used to compute Vin from Vadc through the voltage division
 	float scale;
 	//float quantStep; //Redefined as a global const varaible
 	int i;
 	
-	//Compute the scale used for the voltage division between Vin and Vadc
-	switch (MUX_VALUE) {
+	//Set the scale used for the voltage division between Vin and Vadc
+	switch(measurements->muxValue) {
 		case 0:
 			scale = SCALE_STAGE_0; // Vin = Vadc*4
 			break;
@@ -64,12 +60,12 @@ void convertADC(*adcArray measurements) {
 }
 
 //Perform an FIR filtering on the voltage measurements values
-void filterFIR(*adcArray measurements) {
+void filterFIR(adcArray* measurements) {
 
 }
 
 // Returns the peak-peak voltage in Volts
-void adcMeasure(*adcArray measurements) {
+void adcMeasure(adcArray* measurements) {
 	
 	
 	
@@ -79,10 +75,9 @@ void adcMeasure(*adcArray measurements) {
 int main(int argc, char** argv) {
 	int i = 0;
 	
-	adcArray measurements;
-	
-	measurements = malloc(sizeof(*measurements));
-	
+	adcArray measurements; //Create adcArray struct
+	measurements.muxValue = 0; //Select initial Mux stage
+
 	for (i = 0; i < NUMBER_OF_SAMPLES; i++) {
 		measurements.adcMeasurements[i] = 614; //Approx 1V DC
 	}
@@ -90,13 +85,15 @@ int main(int argc, char** argv) {
 	convertADC(&measurements);
 	
 	while (i < 10) {
-		printf("%f/n", measurements.measure[i]);
+		printf("%f /n", measurements.measure[i]);
 		i++;
 	}
 	
 	//filterFIR(&measurements);
 	//adcMeasure(&measurements);
 	
-	printf("%f", measurements.pkToPk);
+	//printf("%f", measurements.pkToPk);
+
+	return 0; //Exited correctly	
 }
 #endif
