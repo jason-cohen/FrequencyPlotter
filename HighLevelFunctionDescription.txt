@@ -6,6 +6,8 @@
 init() 			//Configures the chips onboard oscillators, input and output ports
 initSDCard()	//Configures the SDCard, including the SPI perhipheral
 initDisplay()	//Configures the LCD display to work in the 4bit mode
+initADC()		//Configures the ADC
+initDAC()		//Configures the VCO and DAC
 
 %Read/Write functions%
 writeLCD()		//Write to the LCD Screen
