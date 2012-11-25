@@ -1,0 +1,51 @@
+%List of functions at a high level%
+***********************************
+
+
+%Intialization functions%
+init() 			//Configures the chips onboard oscillators, input and output ports
+initSDCard()	//Configures the SDCard, including the SPI perhipheral
+initDisplay()	//Configures the LCD display to work in the 4bit mode
+
+%Read/Write functions%
+writeLCD()		//Write to the LCD Screen
+	#Constants that can be passed to the function
+	SETUP 		//Sets the LCD screen to display the current freq range, signal voltage, and sets the currsor to the voltage select
+	CURSOR_VOLTAGE_SELECT	//Positions the cursor to the voltage field
+	CURSOR_FREQ_SELECT		//Positions the cursor to the freq field
+	CURSOR_TRAN_HOLD_SELECT	//Positions the cursor to the transient hold time field
+	UPDATE					//Checks the current value of the freq, transient hold time, and voltage, then updates it to the LCD screen
+	INCREASE_VALUE (+)		//Increases the value at current cursor position
+	DECREASE_VALUE (+)		//Decreases the value at current cursor position
+	
+	#Combination Constants
+	+Value					//Specifices a signed 16 bit interger value
+	
+	
+readLCD()		//Read the LCD current status
+	#Constans that can be passed to the function
+	
+wrtieSDCard()	//Write to the SDCard interface
+	#Constans that can be passed to the function
+	FILE(+)		//Writes a .CSV file to the SDCard
+	#Combination Constants
+	+FILE_NAME	//Specifices a String that contains the filename of the .CSV file
+	
+readSDCard()	//Read from the SDCard interface
+	#Constans that can be passed to the function
+	STATUS		//Checks the current status of the SDCard
+	FILE(+)		//Reads a .CSV file to the SDCard
+	#Combination Constants
+	+FILE_NAME	//Specifices a String that contains the filename of the .CSV file
+	
+readButton()	//Scans the input buttons and looks for a change from HIGH to LOW
+	#Constans that can be passed to the function
+	
+
+%Measurement and algorithm functions%
+applySignal()	//Apply a test signal to the VCO
+	#Constans that can be passed to the function
+	
+adcMeasure() 	//Measures from the ADC and returns the pk-pk value of the waveform
+				//Includes feedback and selecting the correct scaling of the output
+	#Constans that can be passed to the function
