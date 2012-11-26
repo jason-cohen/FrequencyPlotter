@@ -15,7 +15,12 @@ function [ output ] = MinInterpolationWindow( Data )
 Ymin = min(Data(2,:)); %Find the min value
 Xmin = find(Data(2,:) == Ymin); %Ymin's corresponding X-value
 
-output(1,1) = Xmin;
+%Check if Xmin had multiple find results and if so pick the first one
+[n,m] = size(Xmin);
+if(m>1)
+    Xmin = Xmin(1); 
+end 
+output(1,1) = Xmin; 
 output(2,1) = Ymin; %Assign Ymin
 
 %Check that a point exists to the left
