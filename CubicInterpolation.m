@@ -1,4 +1,4 @@
-function [fx] = CubicInterpolation(Data)
+function [x,fx] = CubicInterpolation(Data)
 %CubicInterpolation Summary of this function goes here
 %   Detailed explanation goes here
 %Data is of the form
