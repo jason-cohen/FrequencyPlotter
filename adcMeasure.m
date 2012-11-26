@@ -7,8 +7,8 @@ Data = vertcat(step,value); %Create correctly formatted data array
 maxData = MaxInterpolationWindow(Data); %Find the 4 maximum points to interpolate
 minData = MinInterpolationWindow(Data); %Find the 4 minimum points to interpolate
 
-fxMax = CubicInterpolation(maxData);
-fxMin = CubicInterpolation(minData);
+[xMax,fxMax] = CubicInterpolation(maxData);
+[xMin, fxMin] = CubicInterpolation(minData);
 
 maxValue = max(fxMax); %Find the max value of the interpolated waveform
 minValue = min(fxMin); %Find the min value of the interpolated waveform
