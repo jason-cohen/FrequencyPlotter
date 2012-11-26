@@ -8,6 +8,12 @@ function [ output ] = MaxInterpolationWindow( Data )
 Ymax = max(Data(2,:)); %Find the max value
 Xmax = find(Data(2,:) == Ymax); %Ymax's corresponding X-value
 
+%Check if Xmax had multiple find results and if so pick the first one
+[n,m] = size(Xmax);
+if(m>1)
+    Xmax = Xmax(1); 
+end 
+
 output(1,1) = Xmax;
 output(2,1) = Ymax; %Assign Ymax
 
